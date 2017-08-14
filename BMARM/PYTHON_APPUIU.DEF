@@ -1,0 +1,4 @@
+EXPORTS
+	CreateAmarettoAppUi__Fi @ 1 NONAME R3UNUSED ; CreateAmarettoAppUi(int)
+	RunScriptL__14CAmarettoAppUiRC7TDesC16PC7TDesC16 @ 2 NONAME R3UNUSED ; CAmarettoAppUi::RunScriptL(TDesC16 const &, TDesC16 const *)
+

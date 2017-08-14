@@ -1,0 +1,317 @@
+% Copyright (c) 2005 Nokia Corporation
+%
+% Licensed under the Apache License, Version 2.0 (the "License");
+% you may not use this file except in compliance with the License.
+% You may obtain a copy of the License at
+%
+%     http://www.apache.org/licenses/LICENSE-2.0
+%
+% Unless required by applicable law or agreed to in writing, software
+% distributed under the License is distributed on an "AS IS" BASIS,
+% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+% See the License for the specific language governing permissions and
+% limitations under the License.
+
+\section{Support for Python Standard Library}
+\label{sec:standard}
+
+The standard library support in Python for S60 is summarized in Table 
+\ref{standardsupport}. For API descriptions, see \cite{PyLibRef}.
+
+\begin{center}
+\begin{longtable}{|l|l|l|p{200pt}|}
+\hline
+{\bf Name}& 
+{\bf Type}& 
+{\bf Status}& 
+{\bf Remarks} \\
+\hline
+\code{{\_}testcapi}& 
+PYD& 
+Y& 
+ \\
+\hline
+\code{anydbm}& 
+PY& 
+X& 
+DBM API is implemented by PY \code{e32dbm} that relies on PYD \code{e32db} (see Chapter \ref{sec:e32dbm}, e32dbm Module) \\
+\hline
+\code{atexit}& 
+PY& 
+X& 
+ \\
+\hline
+\code{base64}& 
+PY& 
+X& 
+ \\
+\hline
+\code{bdb}& 
+PY& 
+(X)& 
+ \\
+\hline
+\code{binascii}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{cmd}& 
+PY& 
+(X)& 
+ \\
+\hline
+\code{code}& 
+PY& 
+X& 
+ \\
+\hline
+\code{codecs}& 
+PY& 
+X& 
+ \\
+\hline
+\code{codeop}& 
+PY& 
+X& 
+ \\
+\hline
+\code{copy}& 
+PY& 
+X& 
+ \\
+\hline
+\code{copy{\_}reg}& 
+PY& 
+X& 
+ \\
+\hline
+\code{cStringIO}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{dis}& 
+PY& 
+(X)& 
+ \\
+\hline
+\code{errno}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{exceptions}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{{\_}{\_}future{\_}{\_}}& 
+PY& 
+X& 
+ \\
+\hline
+\code{httplib}& 
+PY& 
+X& 
+ \\
+\hline
+\code{imp}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{keyword}& 
+PY& 
+X& 
+ \\
+\hline
+\code{linecache}& 
+PY& 
+X& 
+ \\
+\hline
+\code{marshal}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{math}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{md5}\footnote{Derived from the RSA Data Security, Inc. MD5 Message-Digest Algorithm.}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{mimetools}& 
+PY& 
+X& 
+ \\
+\hline
+\code{operator}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{os, os.path}& 
+PY& 
+X& 
+Wraps built-in \code{e32posix}. Limitations discussed in Section \ref{subsec:limitations}, Limitations and Areas of Development. \\
+\hline
+\code{pdb}& 
+PY& 
+(X)& 
+ \\
+\hline
+\code{quopri}& 
+PY& 
+X& 
+ \\
+\hline
+Name& 
+Type& 
+Status& 
+Remarks \\
+\hline
+\code{random}& 
+PY& 
+X& 
+ \\
+\hline
+\code{re}& 
+PY& 
+X& 
+Uses PY \code{sre} as its engine. \\
+\hline
+\code{repr}& 
+PY& 
+X& 
+ \\
+\hline
+\code{rfc822}& 
+PY& 
+X& 
+ \\
+\hline
+\code{select}& 
+PY& 
+X& 
+A minimal implementation: \code{select} is supported only for input from sockets. \\
+\hline
+\code{socket}& 
+PY& 
+X& 
+Requires PYD \code{e32socket}. Contains extensions as described in Section \ref{subsec:socket}, socket Module. Limitations discussed in Section \ref{subsec:limitations}, Limitations and Areas of Development.  \\
+\hline
+\code{sre}& 
+PY& 
+X& 
+Wraps built-in \code{{\_}sre}. \\
+\hline
+\code{string}& 
+PY& 
+X& 
+ \\
+\hline
+\code{StringIO}& 
+PY& 
+X& 
+ \\
+\hline
+\code{struct}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{sys}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{thread}& 
+built-in& 
+X& 
+Contains extensions as described in Section \ref{subsec:thread}, thread Module \\
+\hline
+\code{threading}& 
+PY& 
+(X)& 
+ \\
+\hline
+\code{time}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{traceback}& 
+PY& 
+X& 
+ \\
+\hline
+\code{types}& 
+PY& 
+X& 
+ \\
+\hline
+\code{urllib}& 
+PY& 
+X& 
+ \\
+\hline
+\code{urlparse}(urlsplit only)& 
+PY& 
+X& 
+ \\
+\hline
+\code{uu}& 
+PY& 
+X& 
+ \\
+\hline
+\code{warnings}& 
+PY& 
+X& 
+ \\
+\hline
+\code{whichdb}& 
+PY& 
+X& 
+ \\
+\hline
+\code{xreadlines}& 
+built-in& 
+X& 
+ \\
+\hline
+\code{zipfile}& 
+PY& 
+X& 
+ \\
+\hline
+\code{zlib}& 
+PYD& 
+X& 
+ \\
+\hline
+\caption{Status of library module support.}
+\label{standardsupport}
+\end{longtable}
+\end{center}
+
+Table \ref{standardsupport} uses the following coding for module types:
+
+\begin{itemize}
+\item PY -- module is implemented in Python.
+\item Built-in -- module is a built-in C/C++ module.
+\item PYD -- module is a dynamically loadable C/C++ module.
+\end{itemize}
+For support status, the following codes are used:
+
+\begin{enumerate}
+\item[\textbullet] X -- included to the Series 60 Python distribution.
+\item[\textbullet] (X) -- not included to the Series 60 Python distribution, but works both on phone and SDK.
+\item[\textbullet] Y -- included only to the SDK distribution.
+\end{enumerate}

@@ -1,0 +1,19 @@
+#include "socket\bld.inf"
+#include "graphics\bld.inf"
+${{if S60_VERSION>12
+#include "camera\bld.inf"
+}}
+#include "calendar\bld.inf"
+#include "contacts\bld.inf"
+#include "e32db\bld.inf"
+#include "inbox\bld.inf"
+${{if WITH_LOCATION_MODULE
+#include "location\bld.inf"
+}}
+${{if WITH_MESSAGING_MODULE
+#include "messaging\bld.inf"
+}}
+#include "recorder\bld.inf"
+#include "sysinfo\bld.inf"
+#include "telephone\bld.inf"
+#include "zlib\bld.inf"

@@ -1,0 +1,44 @@
+# Portions Copyright (c) 2005 Nokia Corporation
+# LaTeX source dependencies.
+
+COMMONSTYLES= texinputs/python.sty \
+	texinputs/pypaper.sty
+
+INDEXSTYLES=texinputs/python.ist
+
+COMMONTEX= texinputs/copyright.tex \
+	texinputs/boilerplate.tex
+
+MANSTYLES= texinputs/fncychap.sty \
+	texinputs/manual.cls \
+	$(COMMONSTYLES)
+
+HOWTOSTYLES= texinputs/howto.cls \
+	$(COMMONSTYLES)
+
+# LaTeX source files for the Python Library Reference
+LIBFILES= $(MANSTYLES) $(INDEXSTYLES) $(COMMONTEX) \
+	lib/lib.tex\
+	lib/capiextensions.tex\
+	lib/extending.tex\
+	lib/libabbreviations.tex\
+	lib/libappuifw.tex \
+	lib/libaudio.tex \
+	lib/libcalendar.tex\
+	lib/libcamera.tex\
+	lib/libcontacts.tex\
+	lib/libe32.tex \
+	lib/libe32db.tex\
+	lib/libe32dbm.tex\
+	lib/libinbox.tex \
+	lib/libintro.tex \
+	lib/liblocation.tex \
+	lib/libmessaging.tex \
+	lib/libreferences.tex\
+	lib/libselected.tex \
+	lib/libsummary.tex \
+	lib/libsysinfo.tex \
+	lib/libtelephone.tex\
+	lib/libextensions.tex\
+
+

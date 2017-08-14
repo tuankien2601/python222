@@ -1,0 +1,89 @@
+% Copyright (c) 2005 Nokia Corporation
+%
+% Licensed under the Apache License, Version 2.0 (the "License");
+% you may not use this file except in compliance with the License.
+% You may obtain a copy of the License at
+%
+%     http://www.apache.org/licenses/LICENSE-2.0
+%
+% Unless required by applicable law or agreed to in writing, software
+% distributed under the License is distributed on an "AS IS" BASIS,
+% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+% See the License for the specific language governing permissions and
+% limitations under the License.
+
+\chapter{Introduction}
+\label{intro}
+
+% XXX add macro version here
+The Python for S60 Platform (Python for S60) simplifies 
+application development and provides a scripting solution for the Symbian 
+C++ APIs. This document is for Python for S60 release 1.3.1 that is 
+based on Python 2.2.2.
+
+The documentation for Python for S60 includes three documents:
+
+\begin{itemize}
+\item Getting Started with Python for S60 Platform \cite{PyS60Start} contains information on how to install Python for S60 and how to write your first program.
+\item This document contains API and other reference material.
+\item Programming with Python for S60 Platform \cite{PyS60Prog} contains code examples and programming patterns for S60 devices that can be used as a basis for programs.
+\end{itemize}
+Python for S60 as installed on a S60 device consists of:
+
+\begin{itemize}
+\item Python execution environment, which is visible in the application menu of the device and has been written in Python on top of Python for S60 Platform (see S60 SDK documentation \cite{S60Doc})
+\item Python interpreter DLL
+\item Standard and proprietary Python library modules
+\item S60 UI application framework adaptation component (a DLL) that connects the scripting domain components to the S60 UI
+\item Python Installer program for installing Python files on the device, which consists of:
+	\begin{itemize}
+	\item Recognizer plug-in
+	\item Symbian application written in Python
+	\end{itemize}
+\end{itemize}
+
+The Python for S60 developer discussion board \cite{PyS60DiBo} on the 
+Forum Nokia Web site is a useful resource for finding out information on 
+specific topics concerning Python for S60. You are welcome to give 
+feedback or ask questions about Python for S60 through this discussion 
+board.
+
+\section{Scope}
+\label{subsec:scope}
+
+This document includes the information required by developers to create 
+applications that use Python for S60, and some advice on extending the 
+platform.
+
+\section{Audience}
+\label{subsec:audience}
+
+This guide is intended for developers looking to create programs that use the 
+native features and resources of the S60 phones. The reader should be 
+familiar with the Python programming language (\url{http://www.python.org/}) and 
+the basics of using Python for S60 (see Getting Started with Python for 
+S60 Platform \cite{PyS60Start}).
+
+% XXX version macro to this declaration
+\section{New in Release 1.3.1}
+\label{subsec:new}
+
+% XXX macro could include version-1 also
+This section lists the updates in this document since release 1.2.
+
+\begin{itemize}
+\item New attribute \code{focus}, \ref{subsec:application}, Application Type.
+\item Support for float values in \code{query} and \code{Form}, \ref{subsec:module}, Module Level Functions and \ref{subsec:form}, Form Type respectively.
+\item Global note in \code{note}, \ref{subsec:module}, Module Level Functions.
+\item Setting the device time, \ref{subsec:e32}, Module Level Functions.
+\item New type \code{Ao_timer}, \ref{subsec:Aotimer}, Ao\_timer Type.
+\item Section \ref{sec:inbox}, \code{inbox} Module has been added.
+\item New functionality in \code{Sound}, \ref{subsec:sound}, Sound Objects.
+\end{itemize}
+
+\section{Naming Conventions}
+\label{subsec:naming}
+
+Most names of the type \code{ESomething} typically indicate a constant defined 
+by the Symbian SDK. More information about these constants can be found in the 
+Symbian SDK documentation.

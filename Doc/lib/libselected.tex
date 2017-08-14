@@ -1,0 +1,175 @@
+% Copyright (c) 2005 Nokia Corporation
+%
+% Licensed under the Apache License, Version 2.0 (the "License");
+% you may not use this file except in compliance with the License.
+% You may obtain a copy of the License at
+%
+%     http://www.apache.org/licenses/LICENSE-2.0
+%
+% Unless required by applicable law or agreed to in writing, software
+% distributed under the License is distributed on an "AS IS" BASIS,
+% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+% See the License for the specific language governing permissions and
+% limitations under the License.
+
+\chapter{Selected Issues on Python Programming for S60}
+\label{sec:selected}
+
+The following issues must be considered when using Python on S60.
+
+\section{Concurrency Aspects}
+\label{subsec:concurrency}
+The thread that initializes the Python interpreter becomes the main Python 
+thread. This is usually the main thread of a UI application. When an 
+application written in Python launches, the Symbian platform infrastructure 
+creates the main UI thread that starts the Python environment. If a Python 
+program is started as a server with \code{e32.start_server}, then the 
+Python main thread is not a UI thread.
+
+It is possible to launch new threads via the services of \module{thread} 
+module. Examples of such situations could be to overcome eventual problems 
+with the fixed, relatively small stack size of the main UI application 
+thread; or to perform some background processing while still keeping the UI 
+responsive. These new threads are not allowed to directly manipulate the UI; 
+in other words, they may not use the \module{appuifw} module.
+
+Because of the limitations of the Python interpreter's final cleanup, Python 
+applications on the Symbian OS should be designed in such a way that the 
+main thread is the last thread alive.
+
+A facility called active object is used extensively on the Symbian OS to 
+implement co-operative, non-preemptive scheduling within operating system 
+threads. This facility is also utilized with native APIs. A Python 
+programmer is exposed to related concurrency issues particularly in UI 
+programming. Preserving the responsiveness of the UI with the help of active 
+objects needs to be considered when designing the application logic. At the 
+same time it is necessary to take into account the resulting concurrent 
+behavior within the application when active objects are used. While the main 
+execution path of a UI script is blocked in wait for an active object to 
+complete -- either explicitly as a result of using \code{e32.Ao_lock}, 
+or indirectly within some other Python API implementation -- the UI-related 
+callbacks may still get called.
+
+The standard \code{thread.lock} cannot normally be used for 
+synchronization in the UI application main thread, as it blocks the UI event 
+handling that takes place in the same thread context. The Symbian active 
+object based synchronization service called \code{e32.Ao_lock} has been 
+implemented to overcome this problem. The main thread can wait in this lock, 
+while the UI remains responsive.
+
+Python for S60 tries to minimize the unwanted exposure of a Python 
+programmer to the active objects of the Symbian OS. The programmer may 
+choose to implement the eventual concurrent behavior of the application with 
+normal threads. However, certain active object based facilities are offered 
+as an option in the \module{e32} module.
+
+\section{Current S60 Python Script Execution Environment}
+\label{subsec:current}
+
+The current options for installing Python scripts to a S60 device are: a 
+stand-alone installation to the device's main application menu, and an 
+installation to a folder hierarchy maintained by the Python execution 
+environment. For more details on this topic, see Programming with Python for 
+S60 Platform \cite{PyS60Prog}. In the first case the script application is 
+launched via application menu, and it executes in its own process context. The 
+latter case is suitable for development, testing, and trying out new scripts.
+
+The Python execution environment delivered with Python for S60 package 
+has itself been written in Python. It is a collection of scripts that offer 
+an interactive Python console and a possibility to execute scripts located 
+in the directory of the execution environment. Due to this kind of design 
+the scripts are not fully isolated from each other. This means that any 
+changes a script makes in the shared execution environment are visible to 
+other scripts as well. This may be helpful during the development of a 
+script suite, as long as care is taken to avoid unwanted interference 
+between scripts.
+
+For some special issues to consider when writing Python scripts to be run from 
+the current Python execution environment, see Programming with Python for S60 Platform \cite{PyS60Prog}. These include the arrangements for standard output 
+and the maintenance of the Options menu contents.
+
+\section{Standard I/O Streams}
+\label{subsec:standard}
+
+The standard Python I/O streams in the \module{sys} module are by default 
+connected to underlying C STDLIB's \code{stdio} streams that in turn are 
+terminated by dummy file descriptors. Usually Python scripts set the I/O 
+streams suitably by manipulating them at Python level via \module{sys} 
+module interface. The \module{e32} extension module offers a Python 
+interface for attaching to C STDLIB's output streams, but this service is 
+only recommended for debugging purposes. The \code{e32._stdo} function 
+takes as its argument the name of the file where C STDLIB's \code{stdout} 
+and \code{stderr} are to be redirected. This makes it possible to capture 
+the low-level error output when the Python interpreter has detected a fatal 
+error and aborts.
+
+\section{Usage of Unicode}
+\label{subsec:usage}
+No changes have been made to the standard library modules with regard to 
+string argument and return value types. S60 extensions generally 
+accept both plain strings and Unicode strings as arguments, but they return 
+only Unicode strings. APIs that take string arguments for the purpose of 
+showing them on the UI expect Unicode strings. Giving something else may 
+result in garbled appearance of the text on the screen.
+
+\section{Date and Time}
+\label{subsec:datetime}
+Unix time, seconds since January 1, 1970, 00:00:00 UTC (Coordinated 
+Universal Time), is generally used as the time format in the Python for 
+S60 APIs described in this document. The float type is used for 
+storing time values.
+
+\section{Sharing Native Resources between Threads}
+\label{subsec:sharing}
+
+\begin{notice}[warning]
+Python for S60 objects that wrap native resources cannot be shared
+between threads. Trying this can lead to a crash. This is because
+native resources cannot be shared between native threads. Examples:
+
+\begin{itemize}
+\item Symbian OS STDLIB implementation has some limitations that are reflected at OS module support (see S60 SDK documentation \cite{S60Doc}). For example, STDLIB file descriptors cannot be shared between threads, and for that reason, Python file objects cannot either. 
+\item Sockets as implemented in the S60 version of the \module{socket} module.
+\end{itemize}
+\end{notice}
+
+\section{Scalable User Interface}
+\label{sec:scalable}
+
+\begin{notice}[note]
+S60 2nd Edition FP3 and further releases.
+\end{notice}
+
+S60 2nd Edition FP3 enables a new feature called scalable user interface. 
+For Python developers scalable user interface is currently visible in new APIs 
+supporting the scalable UI, icon loading, and new screen resolutions. For more 
+information on scalable user interface, see Section \ref{subsec:icon}, Icon Type 
+of this document, as well as Programming with Python for S60 Platform 
+\cite{PyS60Prog}. 
+
+\section{Error Handling}
+\label{subsec:error}
+
+The APIs described in this document may raise any standard Python 
+exceptions. In situations where a Symbian error code is returned, its 
+symbolic name is given as the value parameter of a \code{SymbianError} 
+exception.
+
+In case where the functions have nothing special to return, they return 
+\code{None} on success.
+
+\section{Limitations and Areas of Development}
+\label{subsec:limitations}
+
+Some OS level concepts to which the standard \module{os} library module 
+offers an interface do not exist as such in Symbian OS environment. An 
+example of this is the concept of current working directory.
+
+Reference cycle garbage collection is not in use. Because of this, special 
+care needs to be taken to dismantle cyclic references when a Python program 
+exits. This prevents error messages related to native resources that are 
+left open. The problem could be removed by developing support for collection 
+of cyclic garbage or by performing a special cleanup action on interpreter 
+exit. The \module{gc} module has been ported to the Symbian OS, and 
+it has been verified to work. However, the current distribution has been 
+built without \module{gc} support.

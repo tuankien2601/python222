@@ -1,0 +1,82 @@
+% Copyright (c) 2005 Nokia Corporation
+%
+% Licensed under the Apache License, Version 2.0 (the "License");
+% you may not use this file except in compliance with the License.
+% You may obtain a copy of the License at
+%
+%     http://www.apache.org/licenses/LICENSE-2.0
+%
+% Unless required by applicable law or agreed to in writing, software
+% distributed under the License is distributed on an "AS IS" BASIS,
+% WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+% See the License for the specific language governing permissions and
+% limitations under the License.
+
+\chapter{API Summary}
+\label{sec:summary}
+
+All built-in object types of the Python language are supported in the
+S60 environment. The rest of the programming interfaces are
+implemented by various library modules as summarized in this chapter.
+
+\section{Python Standard Library}
+\label{subsec:python}
+
+% XXX appendix reference
+Python for S60 platform distribution does not include all of the 
+Python's standard and optional library modules to save storage space in the 
+phone. Nevertheless, many of the excluded modules also work in the S60 
+Python environment without any modifications. Some modules are included in 
+the SDK version but not installed in the phone. For a summary of supported 
+library modules, see Chapter \ref{s60lib}.
+
+When Python, available at \url{http://www.python.org/}, is installed on a PC, the 
+library modules are by edefault located in \file{\textbackslash Python22\textbackslash Lib}
+on Windows and in \file{/usr/lib/python2.2} on Linux. The Python library 
+modules' APIs are documented in \cite{PyLibRef}.
+
+Python for S60 extends some standard modules. These extensions are 
+described in this document, see Chapter \ref{extensions}.
+
+\section{Python for S60 Extensions}
+\label{sec:sumext}
+
+There are two kinds of native C++ extensions in the Python for S60 
+Platform: built-in extensions and dynamically loadable extensions.
+
+\subsection{Built-in extensions}
+\label{sec:built}
+
+There are two built-in extensions in the Python for S60 package:
+
+\begin{itemize}
+\item The \refmodule{e32} extension module is built into the Python interpreter on Symbian OS, and implements interfaces to special Symbian OS Platform services that are not accessible via Python standard library modules.
+\item The \refmodule{appuifw} module for Python for S60 Platform offers UI application framework related Python interfaces.
+\end{itemize}
+
+\subsection{Dynamically loadable extensions}
+\label{sec:dynamically}
+
+These dynamically loadable extension modules provide proprietary APIs
+to S60 Platform's services: \refmodule{graphics} (see Chapter
+\ref{sec:graphics}, graphics Module), \refmodule{e32db} (see Chapter
+\ref{sec:e32db}, e32db Module),
+\refmodule{messaging} (see Chapter \ref{sec:messaging}, messaging Module), 
+\refmodule{inbox} (see Chapter \ref{sec:inbox}, inbox Module), \refmodule{location} 
+(see Chapter \ref{sec:location}, location Module), \refmodule{sysinfo} (see Chapter 
+\ref{sec:sysinfo}, sysinfo Module), \refmodule{camera} (see Chapter 
+\ref{sec:camera}, camera Module), \refmodule{audio} (see Chapter \ref{sec:audio}, 
+audio Module), \refmodule{telephone} (see Chapter \ref{sec:telephone}, telephone 
+Module), \refmodule{calendar} (see Chapter \ref{sec:calendar}, calendar Module), 
+and \refmodule{contacts }(see Chapter \ref{sec:contacts}, contacts Module).
+
+\section{Third-Party Extensions}
+\label{subsec:third}
+
+% XXX appendix references
+It is also possible to write your own Python extensions. S60 related
+extensions to Python/C API are described in Chapter
+\ref{capiextensions}. For some further guidelines on writing
+extensions in C/C++, see Chapter \ref{extending}. In
+addition, for an example on porting a simple extension to S60, see
+\cite{PyS60Prog}.

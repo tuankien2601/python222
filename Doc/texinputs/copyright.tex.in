@@ -1,0 +1,11 @@
+Copyright {\copyright} 2004-2006 Nokia Corporation. 
+
+This is Python for S60 version ${{PYS60_VERSION}} created by Nokia
+Corporation. Files added by Nokia Corporation are licensed under
+Apache License Version 2.0. The original software, including
+modifications of Nokia Corporation therein, is licensed under the
+applicable license(s) for Python 2.2.2, unless specifically indicated
+otherwise in the relevant source code file.
+
+See \verb|http://www.apache.org/licenses/LICENSE-2.0|
+and \verb|http://www.python.org/2.2.2/license.html|

@@ -1,0 +1,32 @@
+TARGET		Python.app
+TARGETTYPE	app
+UID		0x100039ce 0x10201510
+TARGETPATH	\system\apps\Python
+
+NOSTRICTDEF
+DEFFILE		Python_app.frz
+OPTION 	CW -w nounusedarg
+
+SOURCE		Python.cpp
+
+USERINCLUDE . ..\core\Symbian
+SYSTEMINCLUDE	\epoc32\include \epoc32\include\libc
+
+LIBRARY Python_appui.lib
+LIBRARY euser.lib apparc.lib
+LIBRARY eikcore.lib avkon.lib
+
+${{if S60_VERSION<28
+AIF Python.aif . Pythonaif.rss c16 final44x44.bmp final44x44mask.bmp final29x29.bmp final29x29mask.bmp
+RESOURCE	Python.rss
+$else
+START RESOURCE Python.rss
+HEADER
+//LANG  SC //only needed for localized application
+END
+
+START RESOURCE Python_reg.rss
+TARGETPATH \private\10003a3f\apps
+END
+}}
+

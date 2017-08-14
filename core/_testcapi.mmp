@@ -1,0 +1,13 @@
+TARGETTYPE    dll
+TARGET        _testcapi.pyd
+TARGETPATH    \system\libs
+
+SYSTEMINCLUDE \epoc32\include
+SYSTEMINCLUDE \epoc32\include\libc
+
+USERINCLUDE   Symbian Objects Parser Python include Modules
+
+LIBRARY       estlib.lib euser.lib python222.lib
+
+SOURCE        Modules\_testcapimodule.c
+SOURCE        Modules\symbian_pyd_entryp.cpp

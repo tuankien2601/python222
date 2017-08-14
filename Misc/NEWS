@@ -1,0 +1,74 @@
++++++++++++++++++++
+Python for S60 News
++++++++++++++++++++
+
+(editors: check NEWS.help for information about editing NEWS using ReST.)
+
+What's New in Python for S60 1.3.1 alpha 1?
+===========================================
+
+*Release date: 31-DEC-2006*
+
+Core and builtins
+-----------------
+
+- XXX:core
+
+Extension Modules
+-----------------
+
+- ``inbox`` extension added.
+
+- Updates for ``appuifw``:
+
+  + ``query`` (text) supports T9 in user input.
+  + bug #00252: Skin support added for all the widgets that support it natively.
+  + ``focus`` attribute added to ``appuifw.app``.
+  + Float support added to ``Form`` and ``query``. NOTE: the default value setting is not shown in UI.
+  + Global note support added to ``appuifw.note``.
+  + The names for ``appuifw`` types (e.g. ``Form``) changed to full name (e.g. ``appuifw.Form``).
+  
+- Updates for ``e32``:
+  
+  + ``set_home_time()`` added to set the device time.
+  + ``Ao_timer`` type added for sleeping.
+
+- Updates for ``audio``:
+
+  + callback added to ``play()`` parameters.
+  + ``max_volume()`` added.
+  + ``set_volume()`` added.
+  + ``current_volume()`` added.
+  + ``duration()`` added.
+  + ``set_position()`` added.
+  + ``current_position()`` added.
+
+Library
+-------
+
+- XXX:lib
+
+Build
+-----
+
+- XXX:build
+
+C API
+-----
+
+- XXX:CAPI
+
+Tests
+-----
+
+- XXX:tests
+
+Documentation
+-------------
+
+- API documentation changed to LaTex format.
+
+Tools/Demos
+-----------
+
+- XXX:demos

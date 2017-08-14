@@ -1,0 +1,39 @@
+A brief summary of changes made to Python 2.2.2 source during the
+Symbian port:
+
+- Writable static variables used in the interpreter have either been
+converted to 'const' or moved to a struct allocated from the
+heap. References to the variables have been converted to use variables
+in this struct using preprocessor macros. Most such variables have
+been moved to the struct defined in symbian\python_globals.h.
+
+The most common instances are type objects defined in various modules,
+and the global variables used in the interpreter core. Type object
+definitions for modules have usually been converted to constants,
+which are then copied to writable memory at module initialization
+time.
+
+- Since the Metrowerks compiler used for emulator builds in S60 SDK
+2.8 enforces type rules in a very strict way, many casts had to be
+added.  These are marked with "XXX:CW32" in the code.
+
+- To save memory the dynamic generation of parser accelerator arrays
+has been disabled. Instead, a static const copy in python/graminit.c
+is used.
+
+- In Symbian, explicit DL_EXPORT directives are required to export
+functions from a DLL. These have been added to all exported functions.
+
+- httplib.py has been modified slightly to work around the nonstandard
+SSL error behaviour of the S60 socket module.
+
+- Features and functions that are not applicable on the platform have
+been removed from various library modules. 
+
+- Docstrings have been removed or #ifdefed out in most modules to save
+space on device.  Most comments have been removed from Python modules.
+
+- Workarounds to platform bugs have been added at least to
+modules/timemodule.c and objects/fileobject.c.
+
+- Sign handling was added to python/atof.c.

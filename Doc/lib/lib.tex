@@ -1,0 +1,119 @@
+% Portions Copyright (c) 2005 Nokia Corporation
+\documentclass{manual}
+
+% NOTE: this file controls which chapters/sections of the library
+% manual are actually printed.  It is easy to customize your manual
+% by commenting out sections that you're not interested in.
+
+\title{PyS60 Library Reference}
+
+\input{boilerplate}
+
+\makeindex                      % tell \index to actually write the
+                                % .idx file
+\makemodindex                   % ... and the module index as well.
+
+%begin{latexonly}
+\ifx\pdftexversion\undefined
+ \usepackage[dvips]{graphicx}
+\else
+ \usepackage[pdftex]{graphicx}
+\fi
+%end{latexonly}
+\usepackage{graphicx}
+
+\usepackage{longtable}
+
+\graphicspath{{./}{figures/}}
+
+\begin{document}
+
+\maketitle
+
+\ifhtml
+\chapter*{Front Matter\label{front}}
+\fi
+
+\input{copyright}
+
+\begin{abstract}
+
+\noindent
+
+The Python for S60 Platform (Python for S60) simplifies application development 
+and provides a scripting solution for the Symbian C++ APIs. This document is for 
+Python for S60 version \productversion that is based on Python 2.2.2.
+
+\end{abstract}
+
+\tableofcontents
+
+                                % Chapter title:
+
+\input{libintro}                % Introduction
+
+\input{libsummary}              % API summary
+
+\input{libselected}             % Selected issues
+
+\chapter{Operating System Services and Information \label{s60os}}
+
+\input{libe32}
+\input{libsysinfo}
+
+\chapter{User Interface and Graphics \label{s60graph}}
+
+\input{libappuifw}
+\input{libgraphics}
+\input{libcamera}
+
+\chapter{Audio and Communication Services \label{s60ac}}
+
+\input{libaudio}
+\input{libtelephone}
+\input{libmessaging}
+\input{libinbox}
+\input{liblocation}
+
+\chapter{Data Management \label{s60data}}
+
+\input{libcontacts}
+\input{libcalendar}
+\input{libe32db}
+\input{libe32dbm}
+
+\chapter{Standard Library Support and Extensions \label{s60lib}}
+
+\input{standardlibrary}
+\input{libextensions}
+
+\chapter{Extending and Embedding \label{s60ext}}
+
+\input{capiextensions}
+\input{extending}
+
+\input{libabbreviations}
+\input{libreferences}
+
+\appendix
+
+\chapter{Reporting Bugs}
+\input{reportingbugs}
+
+
+%  The ugly "%begin{latexonly}" pseudo-environments are really just to
+%  keep LaTeX2HTML quiet during the \renewcommand{} macros; they're
+%  not really valuable.
+
+
+%begin{latexonly}
+\renewcommand{\indexname}{Module Index}
+%end{latexonly}
+\input{modlib.ind}              % Module Index
+
+%begin{latexonly}
+\renewcommand{\indexname}{Index}
+%end{latexonly}
+\input{lib.ind}                 % Index
+
+\end{document}

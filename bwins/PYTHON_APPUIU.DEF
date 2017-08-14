@@ -1,0 +1,4 @@
+EXPORTS
+	?CreateAmarettoAppUi@@YAPAVCEikAppUi@@H@Z @ 1 NONAME ; class CEikAppUi * __cdecl CreateAmarettoAppUi(int)
+	?RunScriptL@CAmarettoAppUi@@QAEXABVTDesC16@@PBV2@@Z @ 2 NONAME ; public: void __thiscall CAmarettoAppUi::RunScriptL(class TDesC16 const &,class TDesC16 const *)
+

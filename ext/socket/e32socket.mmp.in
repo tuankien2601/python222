@@ -1,0 +1,48 @@
+/* Copyright (c) 2005 Nokia Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+targettype 	dll
+TARGET		e32socket.pyd
+TARGETPATH	\system\libs
+
+${{if S60_VERSION > 12
+MACRO 		HAVE_ACTIVESCHEDULERWAIT
+MACRO		HAVE_SSL
+LIBRARY         securesocket.lib
+$else
+MACRO          PRESDK20
+}}
+
+NOSTRICTDEF
+DEFFILE		socketu.frz
+
+systeminclude 	\epoc32\include
+systeminclude	\epoc32\include\libc
+
+userinclude 	..\..\core\Include
+userinclude   	..\..\core\Python
+userinclude  	..\..\core\Symbian 
+
+LIBRARY 	python222.lib
+LIBRARY 	euser.lib estlib.lib
+LIBRARY		esock.lib
+LIBRARY	    	insock.lib
+LIBRARY	    	bluetooth.lib
+LIBRARY	    	btmanclient.lib
+LIBRARY     	btextnotifiers.lib
+LIBRARY     	sdpagent.lib
+LIBRARY     	sdpdatabase.lib
+LIBRARY	    	irobex.lib
+
+source	    	e32Socketmodule.cpp

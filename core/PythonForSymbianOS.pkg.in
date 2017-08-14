@@ -1,0 +1,90 @@
+; Copyright (c) 2005 Nokia Corporation
+;
+; Licensed under the Apache License, Version 2.0 (the "License");
+; you may not use this file except in compliance with the License.
+; You may obtain a copy of the License at
+;
+;     http://www.apache.org/licenses/LICENSE-2.0
+;
+; Unless required by applicable law or agreed to in writing, software
+; distributed under the License is distributed on an "AS IS" BASIS,
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+;
+; Python for Symbian OS Installation file
+;
+;Languages
+&EN
+;
+; UID is the app's UID
+;
+#{"Python for Symbian OS"},(0x10201511),${{PYS60_VERSION_MAJOR}},${{PYS60_VERSION_MINOR}},${{PYS60_VERSION_MICRO}},TYPE=SISSYSTEM
+
+(${{S60_REQUIRED_PLATFORM_UID}}), 0, 0, 0, {"Series60ProductID"}
+
+; Files to install
+
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\Python222.dll"              -"!:\system\libs\python222.dll"
+;
+; Library modules
+;
+"Lib\btconsole.py"                                          -"!:\system\libs\btconsole.py"
+"Lib\anydbm.py"                                             -"!:\system\libs\anydbm.py"
+"Lib\whichdb.py"                                            -"!:\system\libs\whichdb.py"
+"Lib\e32dbm.py"                                             -"!:\system\libs\e32dbm.py"
+"Lib\key_codes.py"                                          -"!:\system\libs\key_codes.py"
+"Lib\os.py"                                                 -"!:\system\libs\os.py"
+"Lib\pack.py"                                               -"!:\system\libs\pack.py"
+"Lib\ntpath.py"                                             -"!:\system\libs\ntpath.py"
+"Lib\shutil.py"                                             -"!:\system\libs\shutil.py"
+"Lib\code.py"                                               -"!:\system\libs\code.py"
+"Lib\codeop.py"                                             -"!:\system\libs\codeop.py"
+"Lib\linecache.py"                                          -"!:\system\libs\linecache.py"
+"Lib\traceback.py"                                          -"!:\system\libs\traceback.py"
+"Lib\stat.py"                                               -"!:\system\libs\stat.py"
+"Lib\types.py"                                              -"!:\system\libs\types.py"
+"Lib\__future__.py"                                         -"!:\system\libs\__future__.py"
+"Lib\re.py"                                                 -"!:\system\libs\re.py"
+"Lib\sre.py"                                                -"!:\system\libs\sre.py"
+"Lib\sre_compile.py"                                        -"!:\system\libs\sre_compile.py"
+"Lib\sre_constants.py"                                      -"!:\system\libs\sre_constants.py"
+"Lib\sre_parse.py"                                          -"!:\system\libs\sre_parse.py"
+"Lib\site.py"                                               -"!:\system\libs\site.py"
+"Lib\codecs.py"                                             -"!:\system\libs\codecs.py"
+"Lib\atexit.py"                                             -"!:\system\libs\atexit.py"
+"Lib\base64.py"                                             -"!:\system\libs\base64.py"
+"Lib\httplib.py"                                            -"!:\system\libs\httplib.py"
+"Lib\mimetools.py"                                          -"!:\system\libs\mimetools.py"
+"Lib\quopri.py"                                             -"!:\system\libs\quopri.py"
+"Lib\rfc822.py"                                             -"!:\system\libs\rfc822.py"
+"Lib\urlparse.py"                                           -"!:\system\libs\urlparse.py"
+"Lib\uu.py"                                                 -"!:\system\libs\uu.py"
+"Lib\keyword.py"                                            -"!:\system\libs\keyword.py"
+"Lib\warnings.py"                                           -"!:\system\libs\warnings.py"
+"Lib\string.py"                                             -"!:\system\libs\string.py"
+"Lib\StringIO.py"                                           -"!:\system\libs\StringIO.py"
+"Lib\whrandom.py"                                           -"!:\system\libs\whrandom.py"
+"Lib\copy.py"                                               -"!:\system\libs\copy.py"
+"Lib\repr.py"                                               -"!:\system\libs\repr.py"
+"Lib\copy_reg.py"                                           -"!:\system\libs\copy_reg.py"
+"Lib\urllib.py"                                             -"!:\system\libs\urllib.py"
+"Lib\zipfile.py"                                            -"!:\system\libs\zipfile.py"
+"Lib\random.py"                                             -"!:\system\libs\random.py"
+"Lib\encodings\__init__.py"                                 -"!:\system\libs\encodings\__init__.py"
+"Lib\encodings\aliases.py"                                  -"!:\system\libs\encodings\aliases.py"
+"Lib\encodings\ascii.py"                                    -"!:\system\libs\encodings\ascii.py"
+"Lib\encodings\base64_codec.py"                             -"!:\system\libs\encodings\base64_codec.py"
+"Lib\encodings\charmap.py"                                  -"!:\system\libs\encodings\charmap.py"
+"Lib\encodings\hex_codec.py"                                -"!:\system\libs\encodings\hex_codec.py"
+"Lib\encodings\latin_1.py"                                  -"!:\system\libs\encodings\latin_1.py"
+"Lib\encodings\raw_unicode_escape.py"                       -"!:\system\libs\encodings\raw_unicode_escape.py"
+"Lib\encodings\unicode_escape.py"                           -"!:\system\libs\encodings\unicode_escape.py"
+"Lib\encodings\unicode_internal.py"                         -"!:\system\libs\encodings\unicode_internal.py"
+"Lib\encodings\utf_16.py"                                   -"!:\system\libs\encodings\utf_16.py"
+"Lib\encodings\utf_16_be.py"                                -"!:\system\libs\encodings\utf_16_be.py"
+"Lib\encodings\utf_16_le.py"                                -"!:\system\libs\encodings\utf_16_le.py"
+"Lib\encodings\utf_7.py"                                    -"!:\system\libs\encodings\utf_7.py"
+"Lib\encodings\utf_8.py"                                    -"!:\system\libs\encodings\utf_8.py"
+"Lib\encodings\uu_codec.py"                                 -"!:\system\libs\encodings\uu_codec.py"
+"Lib\encodings\zlib_codec.py"                               -"!:\system\libs\encodings\zlib_codec.py"

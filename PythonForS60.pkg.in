@@ -1,0 +1,197 @@
+; Copyright (c) 2005 Nokia Corporation
+;
+; Licensed under the Apache License, Version 2.0 (the "License");
+; you may not use this file except in compliance with the License.
+; You may obtain a copy of the License at
+;
+;     http://www.apache.org/licenses/LICENSE-2.0
+;
+; Unless required by applicable law or agreed to in writing, software
+; distributed under the License is distributed on an "AS IS" BASIS,
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+;
+; Installation file for Python for Series 60
+;
+;Languages
+&EN
+;
+; UID is the app's UID
+;
+#{"Python for S60"},(0x10201510),${{PYS60_VERSION_MAJOR}},${{PYS60_VERSION_MINOR}},${{PYS60_VERSION_MICRO}},TYPE=SISAPP
+
+(${{S60_REQUIRED_PLATFORM_UID}}), 0, 0, 0, {"Series60ProductID"}
+
+${{if S60_VERSION>12
+; Embeds Python for Symbian OS and Python Application Manager
+@"${{SRC_DIR}}\core\PythonForSymbianOS.SIS",(0x10201511)
+@"${{SRC_DIR}}\appmgr\AppMgr.SIS",(0x10201512)
+}}
+
+; Files to install
+;
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\Python.app"           -"!:\system\apps\Python\Python.app"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\Python_appui.dll"     -"!:\system\libs\python_appui.dll"
+
+${{if S60_VERSION==12
+  "\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\Python.rsc"           -"!:\system\apps\Python\Python.rsc"
+  "\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\Python.aif"           -"!:\system\apps\Python\Python.aif"
+  "\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\appuifwmodule.rsc"    -"C:\system\data\appuifwmodule.rsc"
+  IF exists("E:\system") 
+  "\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\appuifwmodule.rsc"    -"E:\system\data\appuifwmodule.rsc"
+  ENDIF
+$else
+  "\Epoc32\data\z\system\apps\python\Python.rsc"   -"!:\system\apps\Python\Python.rsc"
+  "\Epoc32\data\z\system\data\appuifwmodule.rsc"   -"C:\system\data\appuifwmodule.rsc"
+  IF exists("E:\system") 
+  "\Epoc32\data\z\system\data\appuifwmodule.rsc"   -"E:\system\data\appuifwmodule.rsc"
+  ENDIF
+${{if S60_VERSION<28 
+  "\Epoc32\data\z\system\apps\python\python.aif"   -"!:\system\apps\Python\Python.aif"
+$else
+  "\Epoc32\data\z\PRIVATE\10003A3F\APPS\python_reg.rsc"-"!:\Private\10003a3f\apps\python_reg.rsc"
+  "\Epoc32\data\z\system\apps\python\Python_aif.mif"   -"!:\system\apps\Python\Python_aif.mif"
+}}
+}}
+
+; Scripts
+;
+"${{SRC_DIR}}\app\default.py"                   -"!:\system\apps\Python\default.py"
+"${{SRC_DIR}}\app\filebrowser.py"               -"!:\system\apps\Python\filebrowser.py"
+"${{SRC_DIR}}\app\dir_iter.py"                  -"!:\system\libs\dir_iter.py"
+"${{SRC_DIR}}\app\series60_console.py"          -"!:\system\libs\series60_console.py"
+"${{SRC_DIR}}\app\interactive_console.py"       -"!:\system\apps\Python\interactive_console.py"
+
+; Dummy file for bt_console.py created configure file removal during Python uninstallation:
+;
+"${{SRC_DIR}}\app\dummy"                -"c:\system\apps\Python\btconsole_conf.txt"
+;
+; Extras
+"${{SRC_DIR}}\extras\snake.py"       -"!:\system\apps\Python\snake.py"
+"${{SRC_DIR}}\extras\imgviewer.py"     -"!:\system\apps\Python\imgviewer.py"
+"${{SRC_DIR}}\extras\ball.py"     -"!:\system\apps\Python\ball.py"
+"${{SRC_DIR}}\extras\keyviewer.py"     -"!:\system\apps\Python\keyviewer.py"
+
+; Wrappers and other needed files
+;
+"${{SRC_DIR}}\appui\appuifw\appuifw.py"             	-"!:\system\libs\appuifw.py"
+"${{SRC_DIR}}\ext\graphics\graphics.py"        -"!:\system\libs\graphics.py"
+"${{SRC_DIR}}\ext\contacts\contacts.py"        -"!:\system\libs\contacts.py"
+"${{SRC_DIR}}\ext\telephone\telephone.py"	-"!:\system\libs\telephone.py"
+"${{SRC_DIR}}\ext\recorder\audio.py"		-"!:\system\libs\audio.py"
+${{if S60_VERSION>12
+  "${{SRC_DIR}}\ext\camera\camera.py"		-"!:\system\libs\camera.py"
+}}
+"${{SRC_DIR}}\ext\sysinfo\sysinfo.py"		-"!:\system\libs\sysinfo.py"
+"${{SRC_DIR}}\ext\calendar\calendar.py"	-"!:\system\libs\calendar.py"
+"${{SRC_DIR}}\ext\socket\socket.py"		-"!:\system\libs\socket.py"
+"${{SRC_DIR}}\ext\socket\select.py"		-"!:\system\libs\select.py"
+;
+; Server script launchpad
+; 
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\Python_launcher.exe"  -"!:\system\programs\python_launcher.exe"
+;
+; PYDs
+;
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\e32db.pyd"           -"!:\system\libs\e32db.pyd"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\e32socket.pyd"       -"!:\system\libs\e32socket.pyd"
+${{if WITH_MESSAGING_MODULE
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\messaging.pyd"       -"!:\system\libs\messaging.pyd"
+}}
+${{if WITH_LOCATION_MODULE
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\location.pyd"        -"!:\system\libs\location.pyd"
+}}
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\_contacts.pyd"       -"!:\system\libs\_contacts.pyd"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\_sysinfo.pyd"        -"!:\system\libs\_sysinfo.pyd"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\zlib.pyd"       	-"!:\system\libs\zlib.pyd"
+${{if S60_VERSION>12
+  "\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\_camera.pyd"       	-"!:\system\libs\_camera.pyd"
+}}
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\_graphics.pyd"       -"!:\system\libs\_graphics.pyd"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\_telephone.pyd"      -"!:\system\libs\_telephone.pyd"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\_recorder.pyd"      	-"!:\system\libs\_recorder.pyd"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\_calendar.pyd"      	-"!:\system\libs\_calendar.pyd"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\inbox.pyd"      	-"!:\system\libs\inbox.pyd"
+
+${{if S60_VERSION==12
+; Embedded signed SIS files don't work properly on S60 1st Edition, so
+; on that platform we just include the contents of embedded SIS files here.
+
+; Python for Symbian OS files
+
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\Python222.dll"                -"!:\system\libs\python222.dll"
+"${{SRC_DIR}}\app\dir_iter.py"                                    -"!:\system\libs\dir_iter.py"
+"${{SRC_DIR}}\core\Lib\btconsole.py"                        -"!:\system\libs\btconsole.py"
+"${{SRC_DIR}}\core\Lib\anydbm.py"                           -"!:\system\libs\anydbm.py"
+"${{SRC_DIR}}\core\Lib\whichdb.py"                          -"!:\system\libs\whichdb.py"
+"${{SRC_DIR}}\core\Lib\e32dbm.py"                           -"!:\system\libs\e32dbm.py"
+"${{SRC_DIR}}\core\Lib\key_codes.py"                        -"!:\system\libs\key_codes.py"
+"${{SRC_DIR}}\core\Lib\os.py"                               -"!:\system\libs\os.py"
+"${{SRC_DIR}}\core\Lib\pack.py"                             -"!:\system\libs\pack.py"
+"${{SRC_DIR}}\core\Lib\ntpath.py"                           -"!:\system\libs\ntpath.py"
+"${{SRC_DIR}}\core\Lib\shutil.py"                           -"!:\system\libs\shutil.py"
+"${{SRC_DIR}}\core\Lib\code.py"                             -"!:\system\libs\code.py"
+"${{SRC_DIR}}\core\Lib\codeop.py"                           -"!:\system\libs\codeop.py"
+"${{SRC_DIR}}\core\Lib\linecache.py"                        -"!:\system\libs\linecache.py"
+"${{SRC_DIR}}\core\Lib\traceback.py"                        -"!:\system\libs\traceback.py"
+"${{SRC_DIR}}\core\Lib\stat.py"                             -"!:\system\libs\stat.py"
+"${{SRC_DIR}}\core\Lib\types.py"                            -"!:\system\libs\types.py"
+"${{SRC_DIR}}\core\Lib\__future__.py"                       -"!:\system\libs\__future__.py"
+"${{SRC_DIR}}\core\Lib\re.py"                               -"!:\system\libs\re.py"
+"${{SRC_DIR}}\core\Lib\sre.py"                              -"!:\system\libs\sre.py"
+"${{SRC_DIR}}\core\Lib\sre_compile.py"                      -"!:\system\libs\sre_compile.py"
+"${{SRC_DIR}}\core\Lib\sre_constants.py"                    -"!:\system\libs\sre_constants.py"
+"${{SRC_DIR}}\core\Lib\sre_parse.py"                        -"!:\system\libs\sre_parse.py"
+"${{SRC_DIR}}\core\Lib\site.py"                             -"!:\system\libs\site.py"
+"${{SRC_DIR}}\core\Lib\codecs.py"                           -"!:\system\libs\codecs.py"
+"${{SRC_DIR}}\core\Lib\atexit.py"                           -"!:\system\libs\atexit.py"
+"${{SRC_DIR}}\core\Lib\base64.py"                           -"!:\system\libs\base64.py"
+"${{SRC_DIR}}\core\Lib\httplib.py"                          -"!:\system\libs\httplib.py"
+"${{SRC_DIR}}\core\Lib\mimetools.py"                        -"!:\system\libs\mimetools.py"
+"${{SRC_DIR}}\core\Lib\quopri.py"                           -"!:\system\libs\quopri.py"
+"${{SRC_DIR}}\core\Lib\rfc822.py"                           -"!:\system\libs\rfc822.py"
+"${{SRC_DIR}}\core\Lib\urlparse.py"                         -"!:\system\libs\urlparse.py"
+"${{SRC_DIR}}\core\Lib\uu.py"                               -"!:\system\libs\uu.py"
+"${{SRC_DIR}}\core\Lib\keyword.py"                          -"!:\system\libs\keyword.py"
+"${{SRC_DIR}}\core\Lib\warnings.py"                         -"!:\system\libs\warnings.py"
+"${{SRC_DIR}}\core\Lib\string.py"                           -"!:\system\libs\string.py"
+"${{SRC_DIR}}\core\Lib\StringIO.py"                         -"!:\system\libs\StringIO.py"
+"${{SRC_DIR}}\core\Lib\whrandom.py"                         -"!:\system\libs\whrandom.py"
+"${{SRC_DIR}}\core\Lib\copy.py"                             -"!:\system\libs\copy.py"
+"${{SRC_DIR}}\core\Lib\repr.py"                             -"!:\system\libs\repr.py"
+"${{SRC_DIR}}\core\Lib\copy_reg.py"                         -"!:\system\libs\copy_reg.py"
+"${{SRC_DIR}}\core\Lib\urllib.py"                           -"!:\system\libs\urllib.py"
+"${{SRC_DIR}}\core\Lib\zipfile.py"                          -"!:\system\libs\zipfile.py"
+"${{SRC_DIR}}\core\Lib\random.py"                           -"!:\system\libs\random.py"
+"${{SRC_DIR}}\core\Lib\encodings\__init__.py"               -"!:\system\libs\encodings\__init__.py"
+"${{SRC_DIR}}\core\Lib\encodings\aliases.py"                -"!:\system\libs\encodings\aliases.py"
+"${{SRC_DIR}}\core\Lib\encodings\ascii.py"                  -"!:\system\libs\encodings\ascii.py"
+"${{SRC_DIR}}\core\Lib\encodings\base64_codec.py"           -"!:\system\libs\encodings\base64_codec.py"
+"${{SRC_DIR}}\core\Lib\encodings\charmap.py"                -"!:\system\libs\encodings\charmap.py"
+"${{SRC_DIR}}\core\Lib\encodings\hex_codec.py"              -"!:\system\libs\encodings\hex_codec.py"
+"${{SRC_DIR}}\core\Lib\encodings\latin_1.py"                -"!:\system\libs\encodings\latin_1.py"
+"${{SRC_DIR}}\core\Lib\encodings\raw_unicode_escape.py"     -"!:\system\libs\encodings\raw_unicode_escape.py"
+"${{SRC_DIR}}\core\Lib\encodings\unicode_escape.py"         -"!:\system\libs\encodings\unicode_escape.py"
+"${{SRC_DIR}}\core\Lib\encodings\unicode_internal.py"       -"!:\system\libs\encodings\unicode_internal.py"
+"${{SRC_DIR}}\core\Lib\encodings\utf_16.py"                 -"!:\system\libs\encodings\utf_16.py"
+"${{SRC_DIR}}\core\Lib\encodings\utf_16_be.py"              -"!:\system\libs\encodings\utf_16_be.py"
+"${{SRC_DIR}}\core\Lib\encodings\utf_16_le.py"              -"!:\system\libs\encodings\utf_16_le.py"
+"${{SRC_DIR}}\core\Lib\encodings\utf_7.py"                  -"!:\system\libs\encodings\utf_7.py"
+"${{SRC_DIR}}\core\Lib\encodings\utf_8.py"                  -"!:\system\libs\encodings\utf_8.py"
+"${{SRC_DIR}}\core\Lib\encodings\uu_codec.py"               -"!:\system\libs\encodings\uu_codec.py"
+"${{SRC_DIR}}\core\Lib\encodings\zlib_codec.py"             -"!:\system\libs\encodings\zlib_codec.py"
+
+; Python Application Manager
+
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\appmgr.app"                   -"!:\system\apps\appmgr\appmgr.app"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\appmgr.rsc"                   -"!:\system\apps\appmgr\appmgr.rsc"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\appmgr.aif"                  -"!:\system\apps\appmgr\appmgr.aif"
+"\Epoc32\release\${{DEVICE_PLATFORM}}\${{DEVICE_BUILD}}\pyrecog.mdl"                 -"!:\system\recogs\pyrecog.mdl"
+"${{SRC_DIR}}\appmgr\appmgr_default.py"              -"!:\system\apps\appmgr\default.py"
+"${{SRC_DIR}}\appmgr\pyapp_template_pre_SDK20.tmp"   -"!:\system\apps\appmgr\pyapp_template.tmp"
+"${{SRC_DIR}}\appmgr\pyrsc_template_pre_SDK20.tmp"   -"!:\system\apps\appmgr\pyrsc_template.tmp"
+"${{SRC_DIR}}\appmgr\uid_offset_in_app"              -"!:\system\apps\appmgr\uid_offset_in_app"
+}}
+
+

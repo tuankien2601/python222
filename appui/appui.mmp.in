@@ -1,0 +1,27 @@
+TARGETTYPE	dll
+TARGET		Python_appui.dll
+
+NOSTRICTDEF
+DEFFILE		Python_appuiu.def
+
+SYSTEMRESOURCE  ..\app\Python.rss
+SYSTEMRESOURCE  appuifw\appuifwmodule.rss
+
+USERINCLUDE 	. appuifw ..\app
+USERINCLUDE     ..\core\Include ..\core\Symbian
+USERINCLUDE     ..\core\Objects ..\core\Parser
+USERINCLUDE     ..\core\Python ..\core\Modules
+
+SYSTEMINCLUDE	\epoc32\include \epoc32\include\libc
+
+LIBRARY         python222.lib euser.lib estlib.lib
+LIBRARY         cone.lib eikcore.lib eikcoctl.lib eikctl.lib eikdlg.lib
+LIBRARY         avkon.lib bafl.lib efsrv.lib commonui.lib apmime.lib charconv.lib
+LIBRARY         estor.lib etext.lib gdi.lib fbscli.lib form.lib
+LIBRARY         aknnotify.lib
+${{if S60_VERSION == 28
+LIBRARY aknicon.lib egul.lib
+}}
+
+SOURCE		Python_appui.cpp Container.cpp
+SOURCE          appuifw\appuifwmodule.cpp  appuifw\CAppuifwEventBindingArray.cpp

@@ -1,0 +1,45 @@
+PRJ_PLATFORMS
+wins winscw armi
+
+PRJ_MMPFILES
+${{!
+#import os
+#import os.path
+#
+#print "Finding .mmp files..."
+#for root,dirs,files in os.walk(''):	
+#  for f in files:
+#    if f.lower().endswith('.mmp'):
+#      relname=(root+'\\'+f).lower()
+#      print "Found mmp file %s"%relname
+#      write(relname+'\n')
+}}
+
+core\core.mmp
+appui\appui.mmp
+app\app.mmp
+${{if S60_VERSION>=28
+gnumakefile app\icons_aif.mk 
+}}
+appmgr\appmgr.mmp
+exe\python_launcher.mmp
+ext\calendar\calendar.mmp
+${{if S60_VERSION>12
+ext\camera\camera.mmp
+}}
+ext\contacts\contacts.mmp
+ext\e32db\e32db.mmp
+ext\graphics\graphics.mmp
+ext\inbox\inbox.mmp
+${{if WITH_LOCATION_MODULE
+ext\location\location.mmp
+}}
+${{if WITH_MESSAGING_MODULE
+ext\messaging\messaging.mmp
+}}
+ext\recorder\recorder.mmp
+ext\socket\e32socket.mmp
+ext\sysinfo\sysinfo.mmp
+ext\telephone\telephone.mmp
+ext\zlib\zlibmodule.mmp
+recog\pyrecog.mmp

@@ -1,0 +1,17 @@
+TARGET		appmgr.app
+TARGETTYPE	app
+UID		0x100039ce 0x10201512
+TARGETPATH	\system\apps\appmgr
+
+SOURCE		AppMgr.cpp
+RESOURCE	AppMgr.rss
+
+USERINCLUDE     . ..\appui
+USERINCLUDE     ..\core\symbian
+SYSTEMINCLUDE	\epoc32\include \epoc32\include\libc
+
+LIBRARY Python_appui.lib
+LIBRARY euser.lib apparc.lib cone.lib
+LIBRARY eikcore.lib avkon.lib efsrv.lib
+
+AIF AppMgr.aif . AppMgrAif.rss

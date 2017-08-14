@@ -1,0 +1,246 @@
+
+PYTHON FOR S60 1.3.1 RELEASE NOTES
+----------------------------------
+
+Product Description
+===================
+
+Python for S60 is intended for developers looking to create programs
+that use the native features and resources of the S60 phones, using
+the Python programming language. 
+
+Versioning
+==========
+
+The versioning scheme in PyS60 releases is such that releases with an
+even minor version (1.0.x, 1.2.x ...) are "stable" and releases with
+an odd minor version (1.1.x, 1.3.x ...) are "development"
+releases. 1.3.1 is thus a development release, meaning that it
+includes functionality that has not been tested as extensively as the
+stable releases. 
+
+
+Recent Changes
+==============
+
+Changes in 1.3.1 from 1.2:
+--------------------------
+
+Added extensions
+----------------
+
+- A new module 'inbox' has been added that provides simple access to
+the device messaging inbox and callbacks when messages arrive.
+
+Fixed defects
+-------------
+
+247,248: btconsole now displays human readable messages instead of
+tracebacks for the most common errors.
+
+250: reassigning appuifw.app.menu to a different sized menu did not
+work if submenus were used
+
+251: e32.ao_sleep panics with negative numbers.
+
+252: UI widgets didn't look like the current device skin
+
+257: socket connection isn't actually closed when .close method is
+called. Resolves also enhancement request 246.
+
+260: interactive console crashes if assigning Unicode strings to a
+normal string
+
+270: bt_discover, bt_obex_receive and bt_obex_send crash interpreter
+if a Python callback occurs during the operation
+
+Header files moved
+------------------
+
+The SDK package now installs the PyS60 header files in
+"\epoc32\include\python" instead of the old locations under
+"\python-port-s60\symbian_python". All header files are in the same
+directory so the .mmp directive
+
+SYSTEMINCLUDE \epoc32\include\python
+
+will be sufficient to use the PyS60 headers.
+
+
+Known issues
+============
+
+Here are brief descriptions of known issues in the current
+release. The bug ID numbers mentioned refer to ID numbers used in the
+Nokia internal bug tracking system. From now on the SourceForge bug
+tracking system will be used for tracking issues with the PyS60 code.
+There you can find complete information on these and future issues as
+soon as the information is transferred.
+
+026: Uninstalling Python for S60 does not remove user-installed files from 
+directory '\System\Apps\Python\my'.  Before uninstalling Python for S60, 
+you may want to delete this directory using an external file browser. 
+
+031: Reinstallation of 'Python for S60' has been noted to be sometimes 
+problematic on a 7610 phone, if you are installing the same version again (e.g. 
+overwriting 1.0 with 1.0). To avoid problems with reinstallation, uninstall 
+Python for S60 before installing the software again. 
+
+046: When sending an SMS with a device that can be set offline (e.g. Nokia 6630), 
+the Python messaging module might give a misleading error message. Despite this 
+error message, the SMS might still be sent when the phone is set online again. 
+
+080: Math.exp() does not trigger an OverFlowError. No exception is
+raised, because the native math library implementation, in accordance
+with IEEE 754, gives an 'Inf' (infinity) rather than an overflow
+error.
+
+102: On some software revisions of terminal devices, the Application
+Manager does not show any information on Options->View details.
+
+109: Module import treats module names as case insensitive.  Thus, 'import RAnDoM' 
+equals to 'import random'. 
+
+114: Closing a Python application by the S60 runtime environment (e.g. 
+closing the application from the task list) may cause a System panic, if the 
+application does not handle exit cases. 
+
+131: The Symbian STDLIB deviates from ANSI/POSIX standard. This causes
+unwanted behavior in output formatting, e.g.  * "%.3g" % 1.2345
+results '1.2345' instead of '1.23' * "%g" % 1000000 results '1000000'
+instead of '1e+006' Please refer to SDK documentation (SDK Help) for
+further details (keyword: STDLIB).
+
+145: The time values produced by e32db.format_time and e32db.format_rawtime support 
+only one second precision. The formatted time values will be rounded down to the 
+nearest second. The time literals produced by format_rawtime for years near 0 AD 
+are erroneously interpreted by the database as years near 2000 AD.
+
+148: Appuifw.Text does not disable the cursor when it itself becomes invisible. 
+
+150: If a Bluetooth connection is active when socket.bt_discover() is called, a 
+note that says "Unable to connect. Max. number of Bluetooth connections already 
+in use." is displayed and the exception socket.error is raised. 
+
+152: The e32dbm module doesn't support concurrent use from different threads or 
+processes. Unpredictable behaviour may result if this is attempted. Also, an 
+exception is thrown if standard strings with values outside the ASCII range are 
+given as keys or values. It is recommended to use Unicode when using non-ASCII 
+keys or values. 
+
+170: contacts module: export_vcards has problems encoding non-ascii
+characters in field labels
+
+179: Certain MIDI files can crash the 6670
+
+185: sysinfo module: maxramdrivesize() fails on 6630
+
+208: Arithmetic on NaN values can crash the interpreter
+
+209: camera module: the camera can only be released by exiting the
+interpreter (a workaround exists)
+
+212: Text added to a Text widget not set to appuifw.app.body is
+displayed.
+
+217: Exceptions raised by SSL functions of the socket module are
+different from those raised by the Python standard socket module. Code
+that depends on standard SSL exceptions may need to be modified to
+work. 
+
+222: Tabs can become invisible if the Nokia Wireless Keyboard
+application is installed
+
+225: Some dialogs, such as selection_list do not span the full screen
+in 'full' or 'large' screen mode.
+
+227: socket.gethostbyname('localhost') behaves inconsistently on
+different platforms
+
+230: Error note displayed if an exception is raised in a UI callback.
+
+231: time.sleep and e32.ao_sleep crash for sleeps of 2148 seconds or
+more.
+
+232: calendar crashes with a certain database, see
+http://discussion.forum.nokia.com/forum/showthread.php?t=66039
+
+234: Reading uninitialized Text.font attribute crashes Python
+
+236: Reinstallation without uninstalling first can fail on certain
+device models
+
+240: Adding an Icon with indices out of range for the given MBM file
+to a Listbox causes a crash.
+
+243: Cosmetic problem with the 'checkmark' style multi_selection_list:
+tiny "1" are displayed on the left side in SDK 2.8.
+
+245: time.strftime %y format works incorrectly
+
+249: imgviewer.py fails in emulators if there is no e:\images
+directory
+
+258: printing non-ascii characters causes btconsole to raise an
+exception
+
+262: socket.recv() on UDP socket always returns a string of the full
+requested size even if the received packet was smaller
+
+264: Form field type 'number' accepts only integers
+
+265: Passing a default value for 'float' fields in 'Form' and 'query'
+doesn't work
+
+269: If select is used with a timeout on a socket and the timeout
+expires, the socket object doesn't close when close() is called.
+
+271: service names returned by bt_discover end with unnecessary NUL
+characters.
+
+
+Changes to standard library modules:
+====================================
+
+- Docstrings, comments, and test suites have been stripped or abbreviated in all 
+modules to save space.
+
+- anydbm.py, whichdbm.py: Support for e32dbm has been added.
+
+- mimetools.py: Functions that are impossible to implement (like popen) or 
+depend on nonsupported modules (like random) have been omitted.
+
+- ntpath.py: Functions that are inapplicable on the platform, such as 
+expanduser, abspath and so on, have been omitted.
+
+- os.py: 
+  - Functions that are not supported by the platform (such as
+  exec*, spawn*, fork, popen) have been omitted.
+  - Function utime exists, but is a no-op stub.
+
+- quopri.py: Support for running the module as a script has been removed.
+
+- select.py: The only supported use case is selecting for read from
+socket objects.
+
+- shutil.py: Several functions have been omitted to save space or because of 
+missing platform functionality.
+
+- site.py: Simplified and customized for the platform. help() built-in support 
+removed, because the pydoc module is not available and very few docstrings 
+remain in the library modules.
+
+- socket.py: Adapted to work with the native sockets on the platform.
+
+  - getservbyname and getaddrinfo consult a small fixed table instead of an 
+  external service map file. Only few services are supported.
+
+- urllib.py: Proxy settings are loaded from the environment variables, not the 
+phone access point configuration.
+
+- urlparse.py: Only basic functionality is provided.
+
+- Modules distributed with the SDK build and device build are the same.
+
+- time.py: Module attributes are not supported fully.
+

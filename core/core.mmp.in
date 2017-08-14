@@ -1,0 +1,133 @@
+/* Copyright (c) 2005 Nokia Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+TARGETTYPE    dll
+TARGET        Python222.dll
+
+${{if S60_VERSION > 12
+  MACRO         HAVE_ACTIVESCHEDULERWAIT
+  MACRO         HAVE_HUGE_VAL
+  OPTION        CW -w nounusedarg
+}}
+
+#ifndef WINS
+MACRO 	      USE_GLOBAL_DATA_HACK
+EPOCALLOWDLLDATA
+EPOCDATALINKADDRESS 0x33000000
+#endif
+
+SYSTEMINCLUDE \epoc32\include
+SYSTEMINCLUDE \epoc32\include\libc
+
+USERINCLUDE   Symbian Objects Parser Python include Modules
+
+LIBRARY       estlib.lib euser.lib efsrv.lib apmime.lib charconv.lib bafl.lib hal.lib
+
+SOURCE        Symbian\CSPyInterpreter.cpp Symbian\config.c Symbian\python_globals.cpp
+SOURCE        Symbian\symbian_python_ext_util.cpp Symbian\e32module.cpp
+
+SOURCE        Python\bltinmodule.c
+SOURCE        Python\exceptions.c
+SOURCE        Python\ceval.c
+SOURCE        Python\compile.c
+SOURCE        Python\codecs.c
+SOURCE        Python\dynload_symbian.cpp
+
+SOURCE        Python\errors.c
+SOURCE        Python\frozenmain.c
+SOURCE        Python\future.c
+SOURCE        Python\getargs.c
+SOURCE        Python\getcompiler.c
+SOURCE        Python\getcopyright.c
+SOURCE        Python\getmtime.c
+SOURCE        Python\getplatform.c
+SOURCE        Python\getversion.c
+SOURCE        Python\graminit.c
+SOURCE        Python\hypot.c
+SOURCE        Python\import.c
+SOURCE        Python\importdl.c
+SOURCE        Python\marshal.c
+SOURCE        Python\modsupport.c
+SOURCE        Python\mystrtoul.c
+SOURCE        Python\pyfpe.c
+SOURCE        Python\pystate.c
+SOURCE        Python\pythonrun.c
+SOURCE        Python\sigcheck.c
+SOURCE        Python\structmember.c
+SOURCE        Python\symtable.c
+SOURCE        Python\sysmodule.c
+SOURCE        Python\thread.cpp
+SOURCE        Python\traceback.c
+SOURCE        Python\getopt.c
+SOURCE        Python\mysnprintf.cpp
+SOURCE        Python\strtod.c
+SOURCE        Python\atof.c
+
+SOURCE        Objects\abstract.c
+SOURCE        Objects\bufferobject.c
+SOURCE        Objects\cellobject.c
+SOURCE        Objects\classobject.c
+SOURCE        Objects\cobject.c
+SOURCE        Objects\complexobject.c
+SOURCE        Objects\descrobject.c
+SOURCE        Objects\dictobject.c
+SOURCE        Objects\fileobject.c
+SOURCE        Objects\floatobject.c
+SOURCE        Objects\frameobject.c
+SOURCE        Objects\funcobject.c
+SOURCE        Objects\intobject.c
+SOURCE        Objects\listobject.c
+SOURCE        Objects\longobject.c
+SOURCE        Objects\methodobject.c
+SOURCE        Objects\moduleobject.c
+SOURCE        Objects\object.c
+SOURCE        Objects\rangeobject.c
+SOURCE        Objects\sliceobject.c
+SOURCE        Objects\stringobject.c
+SOURCE        Objects\tupleobject.c
+SOURCE        Objects\typeobject.c
+SOURCE        Objects\unicodeobject.c
+SOURCE        Objects\unicodectype.c
+SOURCE        Objects\iterobject.c
+SOURCE        Objects\weakrefobject.c
+SOURCE        Objects\structseq.c
+
+SOURCE        Parser\myreadline.c
+SOURCE        Parser\acceler.c
+SOURCE        Parser\grammar1.c
+SOURCE        Parser\listnode.c
+SOURCE        Parser\node.c
+SOURCE        Parser\parser.c
+SOURCE        Parser\parsetok.c
+SOURCE        Parser\tokenizer.c
+SOURCE        Parser\bitset.c
+SOURCE        Parser\metagrammar.c
+
+SOURCE        Modules\_codecsmodule.c
+SOURCE        Modules\_sre.c
+SOURCE        Modules\binascii.c
+SOURCE        Modules\cStringIO.c
+SOURCE        Modules\errnomodule.c
+SOURCE        Modules\gcmodule.c
+SOURCE        Modules\getbuildinfo.c
+SOURCE        Modules\getpath.c
+SOURCE        Modules\mathmodule.c
+SOURCE        Modules\md5c.c
+SOURCE        Modules\md5module.c
+SOURCE        Modules\operator.c
+SOURCE        Modules\posixmodule.c
+SOURCE        Modules\structmodule.c
+SOURCE        Modules\threadmodule.c
+SOURCE        Modules\timemodule.c
+SOURCE        Modules\xreadlinesmodule.c

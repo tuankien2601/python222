@@ -1,0 +1,27 @@
+;
+; Installation file for Python Application Manager
+;
+;Languages
+&EN
+;
+; UID is the app's UID
+;
+#{"Python Installer"},(0x10201512),1,11,0
+(${{S60_REQUIRED_PLATFORM_UID}}), 0, 0, 0, {"Series60ProductID"}
+;
+; Files to install
+;
+"\Epoc32\release\armi\urel\appmgr.app"                     -"!:\system\apps\appmgr\appmgr.app"
+${{if S60_VERSION==12
+"\Epoc32\release\armi\urel\appmgr.rsc"                     -"!:\system\apps\appmgr\appmgr.rsc"
+"\Epoc32\release\armi\urel\appmgr.aif"                     -"!:\system\apps\appmgr\appmgr.aif"
+"\Epoc32\release\armi\urel\pyrecog.mdl"                    -"!:\system\recogs\pyrecog.mdl"
+$else
+"\Epoc32\data\z\system\apps\appmgr\appmgr.rsc"             -"!:\system\apps\appmgr\appmgr.rsc"
+"\Epoc32\data\z\system\apps\appmgr\appmgr.aif"             -"!:\system\apps\appmgr\appmgr.aif"
+"\Epoc32\release\armi\urel\pyrecog.mdl"                    -"!:\system\recogs\pyrecog.mdl"
+}}
+".\appmgr_default.py"                                           -"!:\system\apps\appmgr\default.py"
+".\pyapp_template.tmp"                                          -"!:\system\apps\appmgr\pyapp_template.tmp"
+".\pyrsc_template.tmp"                                          -"!:\system\apps\appmgr\pyrsc_template.tmp"
+".\uid_offset_in_app"                                           -"!:\system\apps\appmgr\uid_offset_in_app"

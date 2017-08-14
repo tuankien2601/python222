@@ -1,0 +1,17 @@
+% Portions Copyright (c) 2006 Nokia Corporation
+\author{}
+\authoraddress{
+	\strong{Nokia}\\
+%	Email: \email{python-docs@nokia.com} % not in use currently
+}
+
+\date{27 January 2006}
+
+${{! 
+def latexquote(s): return s.replace('_','\\textunderscore ')
+}}
+
+\release{${{latexquote(PYS60_VERSION)}} }			% software release, not documentation
+\setreleaseinfo{ }		% empty for final release
+\setshortversion{${{PYS60_VERSION_MAJOR}}.${{PYS60_VERSION_MINOR}} }		% major.minor only for software
+\newcommand{\productversion}{ ${{latexquote(PYS60_VERSION)}} }
